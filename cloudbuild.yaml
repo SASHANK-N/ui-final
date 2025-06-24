@@ -1,18 +1,22 @@
 steps:
-  - name: 'node'
+  - name: 'gcr.io/cloud-builders/npm'
     entrypoint: 'npm'
     args: ['install']
-  - name: 'node'
+
+  - name: 'gcr.io/cloud-builders/npm'
     entrypoint: 'npm'
     args: ['run', 'build']
+
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
-      - 'run'
-      - 'deploy'
-      - 'ui-final'
-      - '--source=.'
-      - '--region=us-central1'
-      - '--platform=managed'
-      - '--allow-unauthenticated'
-      options:
+      [
+        'run', 'deploy', 'ui-final',
+        '--source=.',
+        '--region=us-central1',
+        '--platform=managed',
+        '--allow-unauthenticated',
+        '--project=fluid-firefly-463906'
+      ]
+
+options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
