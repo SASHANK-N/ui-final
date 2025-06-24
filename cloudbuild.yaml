@@ -1,0 +1,16 @@
+steps:
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['install']
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['run', 'build']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'ui-final'
+      - '--source=.'
+      - '--region=us-central1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
